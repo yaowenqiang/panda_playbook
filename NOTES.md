@@ -119,3 +119,45 @@ captials.sort_index(inplace=true)
 
 > All arguments work both for sort_index and sort_values
 
+
+
+# Detecting Missing Data
+
++ isnull() returns True for every null that is NaN
++ any() returns True if a column is True at least once
+
+## Which columns have missing values?
+
+```python
+df.isnull().any()
+```
+
+```python
+# use axis = 1 for rows
+df[df.isnull().any(axis=1)] 
+```
+
+## notnull() and all() work similar to isnull() and any()
+
+## Removing Missing Values
+
++ You can use df.drop() to remove items
++ But df.dropna() is more powerfull in this case
++ df.dropna() removes rows with missing values
++ df.dropna(axis=1) removes columns with missing values
++ df.dropna(how='all') removes rows where all values are missing
++ df.dropna(how='any') removes rows where any values are missing
++ df.dropna(inplace=True)
++ df.dropna(thresh=2) removes rows where less than 2 values are missing
++ df.dropna(subset=['A', 'B']) removes rows where either A or B is missing
+
+## Filling Missing Values
+
++ df.fillna() fills missing values
++ df.fillna(0) fills missing values with 0
++ df.fillna(df.mean()) fills missing values with the mean of the column
++ df.fillna(method='ffill') fills missing values with the previous value
++ df.fillna(method='bfill') fills missing values with the next value
++ df.fillna(method='bfill', limit=1) fills missing values with the next value, but only for the first missing value
++ df.fillna(method='ffill', limit=1) fills missing values with the previous value, but only for the first missing value
++ df.interpolate() interpolate(插值) fills missing values with linear interpolation
