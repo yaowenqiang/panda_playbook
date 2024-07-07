@@ -252,3 +252,90 @@ df.rename(index={0: 'new_index'}, inplace=True) renames an index in place
 df.rename(columns={'old_name': 'new_name'}, index={0: 'new_index'}) renames a column and an index
 
 df.rename(columns={'old_name': 'new_name'}, index={0: 'new_index'}, inplace=True) renames a column and an index in place
+
+
+# Operating on Two Series
+
+Returns a new Series object
+
+Will all indices from both inputs
+
+Results only filled where indices overlap; NaN everywhere else
+
+```python
+df1 = pd.Series([1, 2, 3], index=['a', 'b', 'c'])
+df2 = pd.Series([4, 5, 6], index=['b', 'c', 'd'])
+df1 + df2
+```
+
+
+## Binary Operator Functions
+
+These support the axis argument
+
++ df.add(x); df + x
++ df.radd(x): x + df
++ df.sub(x); df -x
++ df.rsub(x); x - df
++ df.mul(x); df * x
++ df.rmul(x); x*df
++ df.div(x); df / x
++ df.rdiv(x); x / df
++ df.floordiv(x); df // x
++ df.rfloordiv(x); x // df
++ df.truediv(x); df / x
++ df.mod(x); df % x
++ df.rmod(x); x % df
++ df.pow(x); df ** x
++ df.rpow(x); x ** df
+
+
+compute the sine of all cells in df
+
+np.sin(df)
+
+compute e^x for every x in df
+
+np.exp(df)
+
+## Numpy ufuncs
+
+Functions that work on entire DataFrame/Series
+
+
+DataFrame.applymap() applies a function to each cell
+
+df.applymap(my_func)
+
+## Apply Functions to Cells
+
+Pass the function to df.applymap() - no parentheses!
+
+Returns a new DataFrame with results
+
+Equivalent function on a Series is called apply()
+
+
+
+df.applymap(lambda x: my_func(x))
+
+Series.apply() does the same for values in a Series
+s.apply(my_func)
+
+
+Applying Functions to Cells
+
+
+df.apply(f) Apply f to every column of df
+df.apply(sum) caculate sum of every column
+df.apply(sum, axis=1) caculate sum of every row
+
+
+
+Applying Functions to Rows/Columns
+
+DataFrame.apply() and Series.apply() do different things!
+
+DataFrame.apply() applies a function to entire rows/columns
+
+
