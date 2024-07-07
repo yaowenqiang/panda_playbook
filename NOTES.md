@@ -161,3 +161,94 @@ df[df.isnull().any(axis=1)]
 + df.fillna(method='bfill', limit=1) fills missing values with the next value, but only for the first missing value
 + df.fillna(method='ffill', limit=1) fills missing values with the previous value, but only for the first missing value
 + df.interpolate() interpolate(插值) fills missing values with linear interpolation
+
+# Removing Duplicates
+
+df.duplicated() returns a Series of Booleans, which is True whenever a row is a duplicate
+
+df[df.duplicated()] returns the duplicate rows
+
+df.drop_duplicates() removes duplicate rows
+
+df.drop_duplicates(subset=['A', 'B']) removes duplicate rows where A and B are the same
+
+df.drop_duplicates(keep='first') keeps the first duplicate row and removes the rest
+
+df.drop_duplicates(keep='last') keeps the last duplicate row and removes the rest
+
+df.drop_duplicates(keep=False) removes all duplicate rows
+
+df.drop_duplicates(inplace=True) removes duplicate rows in place
+
+df.unique() does the same but return a numpy array
+
+
+
+# Converting types
+
+df.astype() converts the data type of a column
+
+df['some_column'].astype('int') converts the data type of a column to int
+
+df.astype('float') converts the data type of a column to float
+
+df.astype('str') converts the data type of a column to str
+
+df.astype('category') converts the data type of a column to category
+
+df.astype({'A': 'int', 'B': 'float'}) converts the data type of columns A and B to int and float respectively
+
+
+> Note: All values have to fit into the new data type, otherwise an error will be raised.
+
+
+Data Types
+
+Strings(nullable)
+Python: str
+Numpy: np.object
+
+Floats(nullable)
+Python: float
+Numpy: np.float64
+
+Integers(non-nullable)
+Python: int
+Numpy: np.int64
+
+Others
+bool/np.bool
+complex/np.complex64
+
+
+## Fix indeces
+
+
+Set the index to a simple range 0..n
+
+```python
+df.reset_index(drop=True, inplace=True)  # don't keep the original index
+```
+
+
+Set the index from a column
+
+
+```python
+df.reset_index('id', drop=True, inplace=True)
+```
+
+
+## rename
+
+df.rename(columns={'old_name': 'new_name'}) renames a column
+
+df.rename(columns={'old_name': 'new_name'}, inplace=True) renames a column in place
+
+df.rename(index={0: 'new_index'}) renames an index
+
+df.rename(index={0: 'new_index'}, inplace=True) renames an index in place
+
+df.rename(columns={'old_name': 'new_name'}, index={0: 'new_index'}) renames a column and an index
+
+df.rename(columns={'old_name': 'new_name'}, index={0: 'new_index'}, inplace=True) renames a column and an index in place
