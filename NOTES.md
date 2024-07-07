@@ -339,3 +339,89 @@ DataFrame.apply() and Series.apply() do different things!
 DataFrame.apply() applies a function to entire rows/columns
 
 
+
+# Groupby
+
+Select one ore more columns on the groupby object
+
+Before doing any actual calculations
+
+```python
+athletes.groupby('sport')['gold'].sum()
+```
+
+Group on multiple columns
+
+```python
+athletes.groupby(['sport', 'nationality'])['gold'].sum()
+```
+
+
+Function available for Groupby Objects
+
++ count(),sum()
++ mean(),median()
++ min(),max()
++ std(),var()
++ skew(),kurt()
++ describe()
++ first(),last()
++ cumsum(),cumprod()
++ cummax(),cummin()
++ diff()
++ pct_change()
+
+
+# Structural transformation
+
++ Columns to rows
++ Rows to columns
++ stack(), unstack()
++ pivot(), melt()
+
+
+```python
+df.pivot('index', 'columns', 'values')
+```
+
+Pivot: Transforming One column into Many
+
+Pivot() takes 3 arguments: index, columns and values
+
+Each of these takes a column name from teh origin DataFrame,
+
+Returns a  DataFrame: rows and columns taken from index and columns, values take from values
+
+
+
+
+
+```python
+df.melt(id_vars='prod_id')
+```
+
+Melt: Transforming Many Columns into One
+
+Melt() takes 2 arguments: id_vars and value_vars
+
+id_vars: columns to keep as is
+
+value_vars: columns to transform into one column
+
+Column labels will go into 'variable' column
+
+All other values not set as id_vars will end up in 'value' column
+
+
+
+stack() moves all data into 1 column
+
+with a multi level index
+
+
+unstack() creates columns for the innermost index level
+
+and moves data from the rows into these columns
+
+df.unstack()
+
